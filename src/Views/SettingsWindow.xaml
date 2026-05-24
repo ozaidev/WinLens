@@ -1,0 +1,135 @@
+<Window x:Class="WinLens.Views.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="WinLens"
+        Icon="/assets/winlens.ico"
+        Width="440" Height="694"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        UseLayoutRounding="True"
+        TextOptions.TextFormattingMode="Ideal"
+        FontFamily="Segoe UI">
+
+    <Border Margin="16" CornerRadius="16"
+            Background="{StaticResource BgBrush}"
+            BorderBrush="{StaticResource BorderStrongBrush}"
+            BorderThickness="1">
+        <Border.Effect>
+            <DropShadowEffect Color="#000000" BlurRadius="32" ShadowDepth="6" Opacity="0.55"/>
+        </Border.Effect>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- ============== Title bar ============== -->
+            <Grid x:Name="TitleBar" Grid.Row="0" Height="48" Background="Transparent"
+                  MouseLeftButtonDown="OnTitleBarDrag">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="18,0,0,0">
+                    <Border Width="28" Height="28" CornerRadius="8" Background="{StaticResource AccentGradient}">
+                        <Viewbox Width="16" Height="16">
+                            <Canvas Width="24" Height="24">
+                                <Ellipse Canvas.Left="3" Canvas.Top="3" Width="13" Height="13"
+                                         Stroke="White" StrokeThickness="2.2"/>
+                                <Line X1="14" Y1="14" X2="21" Y2="21" Stroke="White" StrokeThickness="2.2"
+                                      StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+                            </Canvas>
+                        </Viewbox>
+                    </Border>
+                    <TextBlock Text="WinLens" Foreground="{StaticResource TextBrush}"
+                               FontSize="14" FontWeight="SemiBold"
+                               VerticalAlignment="Center" Margin="10,0,0,0"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center"
+                            Margin="0,0,10,0">
+                    <Button Style="{StaticResource TitleBarButton}" Click="OnMinimize" Content="&#xE921;"
+                            FontFamily="Segoe MDL2 Assets" FontSize="10"/>
+                    <Button Style="{StaticResource CloseButton}" Click="OnClose" Content="&#xE8BB;"
+                            FontFamily="Segoe MDL2 Assets" FontSize="10"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- ============== Content ============== -->
+            <StackPanel Grid.Row="1" Margin="22,6,22,20">
+
+                <TextBlock Text="Translate your screen" Style="{StaticResource H1Text}"/>
+                <TextBlock Style="{StaticResource CaptionText}" Margin="0,6,0,0"
+                           Text="Press your shortcut anywhere in Windows to translate on-screen text right where it sits."/>
+
+                <Button x:Name="TranslateButton" Style="{StaticResource PrimaryButton}"
+                        Margin="0,18,0,0" Click="OnTranslateNow">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Viewbox Width="18" Height="18">
+                            <Canvas Width="24" Height="24">
+                                <Ellipse Canvas.Left="3" Canvas.Top="3" Width="13" Height="13"
+                                         Stroke="White" StrokeThickness="2.2"/>
+                                <Line X1="14" Y1="14" X2="21" Y2="21" Stroke="White" StrokeThickness="2.2"
+                                      StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+                            </Canvas>
+                        </Viewbox>
+                        <TextBlock Text="Translate now" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
+                <!-- Target language -->
+                <TextBlock Text="TARGET LANGUAGE" Style="{StaticResource LabelText}" Margin="2,22,0,8"/>
+                <ComboBox x:Name="LanguageCombo" Style="{StaticResource ModernComboBox}"
+                          DisplayMemberPath="Label" SelectionChanged="OnLanguageChanged"/>
+
+                <TextBlock Text="DETECT TEXT IN (OCR)" Style="{StaticResource LabelText}" Margin="2,16,0,8"/>
+                <ComboBox x:Name="SourceCombo" Style="{StaticResource ModernComboBox}"
+                          DisplayMemberPath="Label" SelectionChanged="OnSourceChanged"/>
+                <TextBlock x:Name="AddLangLink" Margin="2,8,0,0" Cursor="Hand"
+                           Foreground="{StaticResource AccentBrush}" FontSize="12" FontWeight="SemiBold"
+                           Text="+ Add OCR languages in Windows…"
+                           MouseLeftButtonUp="OnAddLanguages"/>
+
+                <!-- Shortcut -->
+                <TextBlock Text="SHORTCUT" Style="{StaticResource LabelText}" Margin="2,20,0,8"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Border x:Name="HotkeyChip" Grid.Column="0" Height="42" CornerRadius="10"
+                            Background="{StaticResource SurfaceAltBrush}"
+                            BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
+                        <TextBlock x:Name="HotkeyText" VerticalAlignment="Center" Margin="14,0"
+                                   Foreground="{StaticResource TextBrush}" FontSize="13" FontWeight="SemiBold"/>
+                    </Border>
+                    <Button x:Name="ChangeHotkeyButton" Grid.Column="1" Style="{StaticResource SecondaryButton}"
+                            Content="Change" Margin="10,0,0,0" Click="OnChangeHotkey"/>
+                </Grid>
+
+                <!-- Launch at startup -->
+                <Grid Margin="0,22,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                        <TextBlock Text="Launch at startup" Foreground="{StaticResource TextBrush}"
+                                   FontSize="13" FontWeight="SemiBold"/>
+                        <TextBlock Text="Run WinLens automatically when you sign in."
+                                   Style="{StaticResource CaptionText}" Margin="0,2,0,0"/>
+                    </StackPanel>
+                    <CheckBox x:Name="StartupToggle" Grid.Column="1" Style="{StaticResource ToggleSwitch}"
+                              VerticalAlignment="Center"
+                              Checked="OnStartupToggled" Unchecked="OnStartupToggled"/>
+                </Grid>
+
+                <!-- Footer -->
+                <Border Height="1" Background="{StaticResource BorderBrush}" Margin="0,22,0,14"/>
+                <TextBlock x:Name="FooterText" Style="{StaticResource CaptionText}"
+                           HorizontalAlignment="Center"
+                           Text="WinLens v1.0  ·  Google &amp; MyMemory translation"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>
