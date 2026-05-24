@@ -1,0 +1,16 @@
+## .NET build output
+bin/
+obj/
+[Dd]ebug/
+[Rr]elease/
+*.user
+*.suo
+.vs/
+
+## Rider / Visual Studio
+.idea/
+*.DotSettings.user
+
+## Local scratch (screenshots, test pages, logs)
+assets/_*
+*.log
