@@ -24,9 +24,7 @@ A desktop take on Google Lens translate.
 </div>
 
 <div align="center">
-<img src="assets/demo.png" alt="WinLens translating a multilingual notice board to English in place" width="860"/>
-<br/><br/>
-<img src="assets/demo-menu.png" alt="WinLens translating a Chinese cafe notice to English in place" width="860"/>
+<img src="assets/demo.gif" alt="WinLens translating on-screen text to English in place" width="860"/>
 </div>
 
 ## Overview
