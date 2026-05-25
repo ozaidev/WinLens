@@ -21,9 +21,6 @@ A desktop take on Google Lens translate.
 [![Downloads](https://img.shields.io/github/downloads/marco-beltrame/WinLens/total?color=8b5cf6)](https://github.com/marco-beltrame/WinLens/releases)
 [![Stars](https://img.shields.io/github/stars/marco-beltrame/WinLens?style=flat&color=8b5cf6)](https://github.com/marco-beltrame/WinLens/stargazers)
 
-<br/>
-
-
 </div>
 
 ## Overview
