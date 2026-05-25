@@ -140,8 +140,10 @@ public partial class MainWindow : Window, IDisposable
                 onTargetLangChanged: code =>
                 {
                     _settings.Current.TargetLanguage = code;
+                    LanguagePicker.RecordRecent(_settings.Current, code);
                     _settings.Save(_settings.Current);
-                });
+                },
+                recentTargets: _settings.Current.RecentLanguages);
 
             loading.Close();
             loading = null;

@@ -37,10 +37,7 @@ public partial class SettingsWindow : Window
 
         _suppressEvents = true;
 
-        LanguageCombo.ItemsSource = LanguageList.Items
-            .Select(x => new LanguageOption { Code = x.Code, Label = x.Label })
-            .ToList();
-        SelectCurrentLanguage();
+        RebuildLanguageOptions();
         BuildSourceOptions();
 
         StartupToggle.IsChecked = StartupRegistration.IsEnabled();
@@ -58,6 +55,7 @@ public partial class SettingsWindow : Window
     {
         if (e.NewValue is not true) return;
         _suppressEvents = true;
+        RebuildLanguageOptions(); // float most-recent targets to the top
         BuildSourceOptions();
         _suppressEvents = false;
     }
@@ -71,12 +69,11 @@ public partial class SettingsWindow : Window
         catch { /* Settings app unavailable */ }
     }
 
-    private void SelectCurrentLanguage()
+    private void RebuildLanguageOptions()
     {
-        var current = _settings.Current.TargetLanguage;
-        LanguageCombo.SelectedItem = (LanguageCombo.ItemsSource as IEnumerable<LanguageOption>)?
-            .FirstOrDefault(o => string.Equals(o.Code, current, StringComparison.OrdinalIgnoreCase))
-            ?? (LanguageCombo.ItemsSource as IEnumerable<LanguageOption>)?.FirstOrDefault();
+        var itemStyle = (Style)FindResource("ModernComboBoxItem");
+        LanguagePicker.Populate(LanguageCombo, itemStyle,
+            _settings.Current.TargetLanguage, _settings.Current.RecentLanguages);
     }
 
     // ---------------- Title bar ----------------
@@ -95,8 +92,9 @@ public partial class SettingsWindow : Window
     private void OnLanguageChanged(object sender, SelectionChangedEventArgs e)
     {
         if (_suppressEvents) return;
-        if (LanguageCombo.SelectedItem is not LanguageOption opt) return;
-        _settings.Current.TargetLanguage = opt.Code;
+        if (LanguageCombo.SelectedItem is not ComboBoxItem item || item.Tag is not string code) return;
+        _settings.Current.TargetLanguage = code;
+        LanguagePicker.RecordRecent(_settings.Current, code);
         _settings.Save(_settings.Current);
     }
 

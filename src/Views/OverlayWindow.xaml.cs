@@ -27,6 +27,7 @@ public partial class OverlayWindow : Window
     private readonly List<OcrBlock> _blocks;
     private readonly TranslationService _translator;
     private readonly Action<string> _onTargetLangChanged;
+    private readonly IReadOnlyList<string> _recentTargets;
     private readonly double _pixelToDip;
 
     private readonly Dictionary<OcrBlock, TextBox> _textBoxes = new();
@@ -40,7 +41,8 @@ public partial class OverlayWindow : Window
         List<OcrBlock> blocks,
         TranslationService translator,
         string initialTarget,
-        Action<string> onTargetLangChanged)
+        Action<string> onTargetLangChanged,
+        IReadOnlyList<string>? recentTargets = null)
     {
         InitializeComponent();
         _screenshot = screenshot;
@@ -49,6 +51,7 @@ public partial class OverlayWindow : Window
         _translator = translator;
         _currentTarget = initialTarget;
         _onTargetLangChanged = onTargetLangChanged;
+        _recentTargets = recentTargets ?? Array.Empty<string>();
 
         uint dpi = GetDpiForSystem();
         if (dpi == 0) dpi = 96;
@@ -92,16 +95,7 @@ public partial class OverlayWindow : Window
     private void PopulateLanguages()
     {
         var itemStyle = (Style)FindResource("ModernComboBoxItem");
-        foreach (var (code, label) in LanguageList.Items)
-        {
-            LanguageBox.Items.Add(new ComboBoxItem
-            {
-                Content = label,
-                Tag = code,
-                Style = itemStyle,
-                IsSelected = string.Equals(code, _currentTarget, StringComparison.OrdinalIgnoreCase),
-            });
-        }
+        LanguagePicker.Populate(LanguageBox, itemStyle, _currentTarget, _recentTargets);
         if (LanguageBox.SelectedIndex < 0)
             LanguageBox.SelectedIndex = 0;
     }

@@ -72,7 +72,7 @@
                 <!-- Target language -->
                 <TextBlock Text="TARGET LANGUAGE" Style="{StaticResource LabelText}" Margin="2,22,0,8"/>
                 <ComboBox x:Name="LanguageCombo" Style="{StaticResource ModernComboBox}"
-                          DisplayMemberPath="Label" SelectionChanged="OnLanguageChanged"/>
+                          SelectionChanged="OnLanguageChanged"/>
 
                 <TextBlock Text="DETECT TEXT IN (OCR)" Style="{StaticResource LabelText}" Margin="2,16,0,8"/>
                 <ComboBox x:Name="SourceCombo" Style="{StaticResource ModernComboBox}"
