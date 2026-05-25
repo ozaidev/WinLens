@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using WinLens.Models;
 using WinLens.Services;
 using DBitmap = System.Drawing.Bitmap;
@@ -67,8 +68,16 @@ public partial class OverlayWindow : Window
         OverlayCanvas.MouseLeftButtonDown += (_, _) => Close();
         Closed += (_, _) =>
         {
+            // Release the heavy bits the window held: the decoded full-screen screenshot
+            // and the per-line text boxes. Without this the visual tree keeps them alive.
+            BackgroundImage.Source = null;
+            OverlayCanvas.Children.Clear();
+            _textBoxes.Clear();
             _screenshot.Dispose();
-            MemoryHygiene.Trim(); // reclaim the cycle's large OCR buffers
+
+            // Reclaim only once the window is actually torn down and dereferenced — running
+            // the compaction here (still inside Closed) would find everything still rooted.
+            Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new Action(MemoryHygiene.Trim));
         };
         Loaded += (_, _) =>
         {

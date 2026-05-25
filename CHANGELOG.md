@@ -4,6 +4,13 @@ All notable changes to this project are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/), and the project follows
 [Semantic Versioning](https://semver.org/).
 
+## [1.1.1] - 2026-05-25
+
+### Performance
+- Memory is now released after each translation. The overlay frees the full-screen screenshot
+  and per-line boxes on close, the reclaim runs once the window is torn down, and the working
+  set is trimmed so the process returns to a few MB at idle instead of lingering around 200 MB.
+
 ## [1.1.0] - 2026-05-25
 
 ### Added
@@ -36,5 +43,6 @@ First public release.
 - Per-monitor-v2 DPI awareness and multi-monitor virtual-screen capture.
 - `--settings` and `--translate` command-line flags.
 
+[1.1.1]: https://github.com/marco-beltrame/WinLens/releases/tag/v1.1.1
 [1.1.0]: https://github.com/marco-beltrame/WinLens/releases/tag/v1.1.0
 [1.0.0]: https://github.com/marco-beltrame/WinLens/releases/tag/v1.0.0
