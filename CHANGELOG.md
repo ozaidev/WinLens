@@ -4,6 +4,21 @@ All notable changes to this project are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/), and the project follows
 [Semantic Versioning](https://semver.org/).
 
+## [1.1.0] - 2026-05-25
+
+### Added
+- "Translating…" spinner while a capture is being processed, so it's clear work is happening.
+- The app logo is now used as the brand mark in the control panel and the translation overlay.
+
+### Changed
+- OCR recognizers now run in parallel instead of one after another, so a multi-language screen
+  translates noticeably faster.
+
+### Performance
+- Idle memory dropped from about 350 MB to about 94 MB, and the per-translation spike is lower.
+  The screenshot is now copied once on its way to the OCR engine instead of several times, and
+  the large buffers from each cycle are reclaimed afterwards.
+
 ## [1.0.0] - 2026-05-25
 
 First public release.
@@ -21,4 +36,5 @@ First public release.
 - Per-monitor-v2 DPI awareness and multi-monitor virtual-screen capture.
 - `--settings` and `--translate` command-line flags.
 
+[1.1.0]: https://github.com/marco-beltrame/WinLens/releases/tag/v1.1.0
 [1.0.0]: https://github.com/marco-beltrame/WinLens/releases/tag/v1.0.0

@@ -9,6 +9,9 @@
     <UseWPF>true</UseWPF>
     <RootNamespace>WinLens</RootNamespace>
     <AssemblyName>WinLens</AssemblyName>
+    <Version>1.1.0</Version>
+    <FileVersion>1.1.0.0</FileVersion>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>assets\winlens.ico</ApplicationIcon>
     <LangVersion>latest</LangVersion>
