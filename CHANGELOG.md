@@ -4,6 +4,20 @@ All notable changes to this project are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/), and the project follows
 [Semantic Versioning](https://semver.org/).
 
+## [1.2.0] - 2026-05-25
+
+### Added
+- Full set of around 100 translation target languages (was 12). Pick any of them directly;
+  the dropdown supports type-to-jump.
+- Your most-recently-used target languages are pinned to the top of the picker for quick switching.
+
+### Changed
+- The overlay's right-click menu now matches the dark theme, and the text-selection highlight
+  is clearer so you can see what you're selecting.
+
+### Removed
+- The translation-provider note in the settings footer.
+
 ## [1.1.1] - 2026-05-25
 
 ### Performance
@@ -43,6 +57,7 @@ First public release.
 - Per-monitor-v2 DPI awareness and multi-monitor virtual-screen capture.
 - `--settings` and `--translate` command-line flags.
 
+[1.2.0]: https://github.com/marco-beltrame/WinLens/releases/tag/v1.2.0
 [1.1.1]: https://github.com/marco-beltrame/WinLens/releases/tag/v1.1.1
 [1.1.0]: https://github.com/marco-beltrame/WinLens/releases/tag/v1.1.0
 [1.0.0]: https://github.com/marco-beltrame/WinLens/releases/tag/v1.0.0
